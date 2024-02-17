@@ -1,6 +1,7 @@
 package MeLivra.apimeLivraComentarios.controllers;
 
 import MeLivra.apimeLivraComentarios.domain.comentario.*;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +21,9 @@ public class ComentariosController {
     @GetMapping
     public ResponseEntity getAllComentarios(@RequestBody @Valid RequestComentarioGet data ){
         var ALLComentarios = repository.findAllByNomeprofessor(data.nomeprofessor().toUpperCase());
+        if(ALLComentarios.size()==0){
+            throw new EntityNotFoundException();
+        }
         return ResponseEntity.ok(ALLComentarios);
     }
 
@@ -28,7 +32,7 @@ public class ComentariosController {
 
         Comentarios newcomentario = new Comentarios(data);
         newcomentario.setNomeprofessor(data.nomeprofessor().toUpperCase());
-        
+
         repository.save(newcomentario);
         return ResponseEntity.ok().build();
     }
@@ -45,7 +49,7 @@ public class ComentariosController {
             comentario.setDescricao(data.descricao());
            return ResponseEntity.ok(comentario);
         }else {
-           return ResponseEntity.notFound().build();
+           throw new EntityNotFoundException();
         }
 
 
