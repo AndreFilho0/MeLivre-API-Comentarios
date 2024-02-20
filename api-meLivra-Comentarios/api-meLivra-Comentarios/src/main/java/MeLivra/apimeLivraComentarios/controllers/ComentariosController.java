@@ -13,12 +13,11 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/comentarios")
-@CrossOrigin(origins = "*")
 public class ComentariosController {
     @Autowired
     private ComentarioRepository repository;
 
-
+    @CrossOrigin(origins = "*")
     @GetMapping
     public ResponseEntity getAllComentarios(@RequestBody @Valid RequestComentarioGet data ){
         var ALLComentarios = repository.findAllByNomeprofessor(data.nomeprofessor().toUpperCase());
@@ -27,7 +26,7 @@ public class ComentariosController {
         }
         return ResponseEntity.ok(ALLComentarios);
     }
-
+    @CrossOrigin(origins = "*")
     @PostMapping
     public  ResponseEntity registrarComentario(@RequestBody @Valid RequestComentario data ){
 
