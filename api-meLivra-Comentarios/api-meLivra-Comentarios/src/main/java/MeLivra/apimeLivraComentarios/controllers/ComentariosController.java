@@ -13,6 +13,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/comentarios")
+@CrossOrigin(origins = "*")
 public class ComentariosController {
     @Autowired
     private ComentarioRepository repository;
