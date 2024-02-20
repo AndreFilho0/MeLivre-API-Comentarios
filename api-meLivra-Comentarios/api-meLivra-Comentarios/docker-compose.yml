@@ -26,6 +26,21 @@ services:
       - 15432:80
     networks:
       - mynetwork
+
+  appcomentarios:
+    container_name: api-comentarios
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    depends_on:
+      - database
+
+    ports:
+      - 8080:8080
+    networks:
+      - mynetwork
+
 networks:
   mynetwork:
     driver: bridge
