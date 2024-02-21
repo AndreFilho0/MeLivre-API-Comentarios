@@ -19,8 +19,8 @@ public class ComentariosController {
 
     @CrossOrigin(origins = "*")
     @GetMapping
-    public ResponseEntity getAllComentarios(@RequestBody @Valid RequestComentarioGet data ){
-        var ALLComentarios = repository.findAllByNomeprofessor(data.nomeprofessor().toUpperCase());
+    public ResponseEntity getAllComentarios(){
+        var ALLComentarios = repository.findAll();
         if(ALLComentarios.size()==0){
             throw new EntityNotFoundException();
         }
